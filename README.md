@@ -54,7 +54,12 @@ Order payment method
 
 ```
 
+### DONE
 
+#### Running Expo on Iphone and AndroidStudio via Exp-CLI
+#### Instaled Firebase
+#### Instaled React-Native-DotEnv
+#### Config WillMount on App to acess Firebase
 
 
 
