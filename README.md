@@ -54,13 +54,34 @@ Order payment method
 
 ```
 
-### DONE
+### STEP ONE - DEFINE DEVELOPMENT STACK
 
-#### Running Expo on Iphone and AndroidStudio via Exp-CLI
-#### Instaled Firebase
-#### Instaled React-Native-DotEnv
-#### Config WillMount on App to acess Firebase
+```
 
+ Running Expo on Iphone and AndroidStudio via Exp-CLI
+ Instaled Firebase
+ Instaled React-Native-DotEnv
+ Config WillMount on App to acess Firebase
+ Installed React-Native-Base
+ Installed Expobook
+
+```
+
+### STEP TWO - DEFINE FILES ARCHITECHTURE ( ATOMIC DESIGN )
+
+```
+    .
+    ├── src
+    |   ├── components 
+    |      ├── atoms                              *the minor parts off app
+    |      ├── molecules                          *combinations of atoms
+    |      ├── organisms                          *combinations of molecules 
+    |      └── screens                            *combinations
+    |    ├── assets                               *images and other stuff
+    |    └── constants                            *variables like margin font size and etc
+    └── README.md
+
+```
 
 
 
