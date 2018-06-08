@@ -10,6 +10,19 @@ import {
   MESSAGINSENDERID
 } from 'react-native-dotenv'
 
+import { createStackNavigator } from 'react-navigation'
+import {FindTable, Welcome} from './src/components/screens'
+
+const RootStack = createStackNavigator(
+  {
+    FindTable: { screen: FindTable },
+    Welcome: { screen: Welcome }
+  },
+  {
+    initialRouteName: 'Welcome',
+  }
+);
+
 export default class App extends React.Component {
   componentWillMount() {
     firebase.initializeApp({
@@ -22,21 +35,6 @@ export default class App extends React.Component {
     });
   }
   render() {
-    return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your appz</Text>
-        <Text>Changes you make will automatically reload.</Text>
-        <Text>Shake your phone to open the developer menu.</Text>
-      </View>
-    );
+    return <RootStack />;
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
