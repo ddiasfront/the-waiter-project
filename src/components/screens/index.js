@@ -1,4 +1,4 @@
-import FindTable from './FindTable'
+import CodeScanner from './CodeScanner'
 import Welcome from './Welcome'
 
-export { FindTable, Welcome }
+export { CodeScanner, Welcome }

@@ -1,16 +1,20 @@
 import React, { Component } from "react";
-import { Button, View, Text } from "react-native";
+import { Button, Text, StatusBar, ScrollView } from "react-native";
+import { SafeAreaView } from "react-navigation";
 
 class Welcome extends Component {
   render() {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-        <Text>Home Screen</Text>
-        <Button
-          title="Go to Details"
-          onPress={() => this.props.navigation.navigate("FindTable")}
-        />
-      </View>
+      <ScrollView>
+        <SafeAreaView>
+          <Text>Home Screen</Text>
+          <Button
+            title="Go to Details"
+            onPress={() => this.props.navigation.openDrawer()}
+          />
+          <StatusBar barStyle="default" />
+        </SafeAreaView>
+      </ScrollView>
     );
   }
 }
