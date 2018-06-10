@@ -9,7 +9,7 @@ import {
   MESSAGINSENDERID
 } from 'react-native-dotenv'
 
-import DrawerMenu from './drawerMenu'
+import HomeScreen from './src/components/screens/HomeScreen/index.js'
 
 export default class App extends React.Component {
   componentWillMount() {
@@ -24,7 +24,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
-        <DrawerMenu />
+        <HomeScreen />
     );
   }
 }
