@@ -10,6 +10,7 @@ Welcome screen, and a message telling to scan the QR Code for login
 
 ### Firebase API 
 
+```
 1 - Login with QRCode Data wich also contains table number
 2 - Retrieve All menu items
 3 - Create a order based on the table ID 
@@ -18,6 +19,7 @@ Welcome screen, and a message telling to scan the QR Code for login
 6 - Send order to admin
 7 - Admin verify order
 8 - Admin edit order ( attended / not attended )
+```
 
 ### QR Code Login
 
