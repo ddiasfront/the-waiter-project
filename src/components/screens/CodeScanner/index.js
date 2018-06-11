@@ -39,6 +39,7 @@ class CodeScanner extends Component {
     return (
       <Container>
         <Content>
+          
           {this.state.hasCameraPermission === null
             ? <Text>Requesting for camera permission</Text>
             : this.state.hasCameraPermission === false
