@@ -6,25 +6,10 @@ import TextButton from "../../Atoms/Button";
 import * as firebase from 'firebase'
 import {
   Container,
-  Button,
-  Body,
-  Content,
-  Text,
-  Card,
-  CardItem
+  Content
 } from "native-base";
 
 class HomeScreen extends Component {
-  componentWillMount() {
-    firebase.database().ref('/tables').on('value', (snapshot) => {
-      const tables = snapshot.val()
-      this.setState({
-        tables: tables
-      }, () => {
-        console.log(this.state.tables)
-      })
-    });
-  }
   render() {
     return (
       <Container>

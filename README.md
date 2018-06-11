@@ -8,22 +8,25 @@ How the name defines itself, a waiter service, self-attendance app constructed o
 Welcome screen, and a message telling to scan the QR Code for login
 ```
 
+### Firebase API 
 
-### Generate QR Codes
-
-```
-QR Codes containing info for logging in the app, plus logging in the wi-fi connection.
-Login info: Table number plus an ID for asking things.
-
-```
+1 - Login with QRCode Data wich also contains table number
+2 - Retrieve All menu items
+3 - Create a order based on the table ID 
+4 - Add items to order 
+5 - Edit/Exclude items in order
+6 - Send order to admin
+7 - Admin verify order
+8 - Admin edit order ( attended / not attended )
 
 ### QR Code Login
 
 ```
-Acess QR Code scanner for react-native
+Acess QR Code scanner component
 Login with QR Code Info
 Login Wi-Fi connection ( acess wifi from the phone, plus connect with the qr code info)
-
+Login to Firebase and Retrieve menu data
+Redirect to menu Screen
 ```
 
 ### Menu
