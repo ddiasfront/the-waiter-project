@@ -3,6 +3,7 @@ import { StatusBar } from "react-native";
 import MenuHeader from "../../Molecules/MenuHeader";
 import SingleCard from "../../Atoms/Card";
 import TextButton from "../../Atoms/Button";
+import * as firebase from 'firebase'
 import {
   Container,
   Button,
@@ -14,12 +15,23 @@ import {
 } from "native-base";
 
 class HomeScreen extends Component {
+  componentWillMount() {
+    firebase.database().ref('/tables').on('value', (snapshot) => {
+      const tables = snapshot.val()
+      this.setState({
+        tables: tables
+      }, () => {
+        console.log(this.state.tables)
+      })
+    });
+  }
   render() {
     return (
       <Container>
         <MenuHeader navigation={this.props.navigation} />
         <Content padder>
           <SingleCard>
+            {this.props.tables}
             Easy make your orders, start by scanning the QR code on your table
           </SingleCard>
           <TextButton

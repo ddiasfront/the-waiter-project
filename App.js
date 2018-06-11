@@ -9,22 +9,25 @@ import {
   MESSAGINSENDERID
 } from 'react-native-dotenv'
 
-import HomeScreen from './src/components/screens/HomeScreen/index.js'
+import HomeScreen from './src/components/screens/HomeScreen'
 
 export default class App extends React.Component {
+  state = {
+    tables: null
+  };
   componentWillMount() {
     firebase.initializeApp({
-        apiKey: APIKEY,
-        authDomain: AUTHDOMAIN,
-        databaseURL: DATABASEURL,
-        projectId: PROJECTID,
-        storageBucket: STORAGEBUCKET,
-        messagingSenderId: MESSAGINSENDERID
+      apiKey: APIKEY,
+      authDomain: AUTHDOMAIN,
+      databaseURL: DATABASEURL,
+      projectId: PROJECTID,
+      storageBucket: STORAGEBUCKET,
+      messagingSenderId: MESSAGINSENDERID
     });
   }
   render() {
     return (
-        <HomeScreen />
+        <HomeScreen tables={this.state.tables ? this.state.tables : null}/>
     );
   }
 }

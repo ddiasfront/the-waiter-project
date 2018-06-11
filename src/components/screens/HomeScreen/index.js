@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import HomeScreen from './HomeScreen.js'
+import HomeScreen from './HomeScreen'
 import CodeScanner from '../CodeScanner'
 import { createDrawerNavigator } from 'react-navigation-drawer';
+
 
 const HomeScreenRouter = createDrawerNavigator(
   {
