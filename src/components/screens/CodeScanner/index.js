@@ -5,6 +5,7 @@ import {
   Text,
   StatusBar,
 } from "react-native";
+import MenuHeader from '../../Molecules/MenuHeader'
 import { Container, Content } from 'native-base'
 import { BarCodeScanner, Permissions } from 'expo';
 
@@ -38,6 +39,7 @@ class CodeScanner extends Component {
   render() {
     return (
       <Container>
+        <MenuHeader opacity={0.6} navigation={this.props.navigation}/>
         <Content>
           
           {this.state.hasCameraPermission === null
