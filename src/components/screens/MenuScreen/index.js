@@ -3,7 +3,7 @@ import { Container, Content, Button, Text } from 'native-base';
 import SingleCard from '../../Atoms/Card'
 import Loading from '../../Molecules/Loading'
 import MenuHeader from '../../Molecules/MenuHeader'
-import {getMenu} from '../../../api'
+import {getMenuFirst, getRange} from '../../../api'
 
 import { FlatList } from 'react-native';
 
@@ -14,24 +14,30 @@ class MenuScreen extends Component {
     QrData: null,
     Loading: false,
     Menu: null,
-    QueryCounter: 0
+    LastQueriedItemKey: 0,
+    NewItemsQueried: null
   }
 
   _handleState = (key, value) => this.setState({
     [key]: value
   }, () => {
+    // console.log(this.state, 'Handlestate')
     key == 'Menu' && this.state.Menu !== null ? this.setState({Loading: false}) : false
   })
 
-_handleMenu = () => this.state.Menu.map((data, index) => <ListThumb key={index} data={data}/>)
+  _handleQueryState = (QueryItens) => this.setState({Menu: this.state.Menu.concat(QueryItens)}, () => {
+    // console.log(this.state.Menu, 'CONCATENADED QUERY')
+  })
 
-_handleMenuQuery = () => {
-  getMenu()
-}
+  _handleMenu = () => this.state.Menu.map((data, index) => <ListThumb key={index} data={data}/>)
+
+  _handleMenuQuery = () => {
+    !this.state.LastQueriedItemKey ? this.setState({LastQueriedItemKey: 0}) : getRange(this.state.LastQueriedItemKey, this._handleQueryState, this._handleState)
+  }
 
   componentWillMount() {
     this.state.Menu == null ? this.setState({Loading: true}, () => {
-      getMenu('Menu', this._handleState, 1, 5)
+      getMenuFirst('Menu', this._handleState)
     }) : false
     if ( this.props.navigation.state.params == null ) {
       this.props.navigation.navigate('HomeScreen')
@@ -47,21 +53,23 @@ _handleMenuQuery = () => {
       <Container>
         <MenuHeader navigation={this.props.navigation}/>
         <Content> 
-            <SingleCard>
+            {/* <SingleCard>
                 {this.state.QrData === null ? 'Please Scan the Qr Code' : 'Your table number: ' + this.state.QrData.table}
-            </SingleCard>
+            </SingleCard> */}
             {this.state.Loading == true &&
               <Loading element={'Menu'}/>
             }
             {this.state.Menu  === null ? 'Menu deppends on QR Code' : 
             <FlatList
-              data={this.state.Menu}
-              renderItem={({item}) => 
-                <ListThumb key={index} data={item}/> }
+              data={this.state.Menu }
+              renderItem={
+                (item) => <ListThumb data={item}/>
+              } 
+              keyExtractor={(item, index) => index.toString()}
             />
             }
             <Button
-            onPress={() => this._handleMenuQuery}
+            onPress={this._handleMenuQuery}
             >
             <Text>ClickToLoad</Text>
             </Button>
