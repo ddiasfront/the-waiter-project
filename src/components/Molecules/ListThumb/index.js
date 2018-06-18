@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
-import { Container, Header, Content, List, ListItem, Thumbnail, Text, Body } from 'native-base';
-import { FlatList } from 'react-native';
+import {ListItem, Thumbnail, Text, Body } from 'native-base';
 import {formatPrice} from '../../../utils/formatPrice'
 
 export default class ListThumb extends Component {
-    componentWillMount() {
-    }
+  componentWillMount() {
+  }
   render() {
     return (
     <ListItem style={{alignItems: 'flex-start'}}>

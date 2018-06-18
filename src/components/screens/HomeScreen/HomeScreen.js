@@ -1,16 +1,17 @@
 import React, { Component } from "react";
-import { StatusBar } from "react-native";
 import MenuHeader from "../../Molecules/MenuHeader";
 import SingleCard from "../../Atoms/Card";
 import TextButton from "../../Atoms/Button";
-import * as firebase from 'firebase'
 import {
   Container,
   Content
-} from "native-base";
+} from "native-base"; 
+
+import * as textColors from '../../../constants/styles.js'
 
 class HomeScreen extends Component {
   render() {
+    console.log(textColors)
     return (
       <Container>
         <MenuHeader navigation={this.props.navigation} />
@@ -27,15 +28,6 @@ class HomeScreen extends Component {
             onPress={() => this.props.navigation.navigate("CodeScanner")}
           >
             Scan QR Code
-          </TextButton>
-          <TextButton
-            full
-            rounded
-            primary
-            style={{ marginTop: 10 }}
-            onPress={() => this.props.navigation.navigate("MyOrders")}
-          >
-            See Your Orders
           </TextButton>
         </Content>
       </Container>

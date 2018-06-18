@@ -9,13 +9,11 @@ import {
 export default class SingleCard extends React.Component {
   render() {
     return (
-      <Card>
+      <Card style={{flex: 0  }}>
         <CardItem>
-          <Body>
             <Text>
               {this.props.children}
             </Text>
-          </Body>
         </CardItem>
       </Card>
     );

@@ -18,7 +18,7 @@ export default class MenuHeader extends React.Component {
             transparent
             onPress={() => this.props.navigation.openDrawer()}
           >
-            <Icon name="menu" />
+            <Icon style={{color: '#c64545'}} name="menu" />
           </Button>
         </Left>
         <Body>
