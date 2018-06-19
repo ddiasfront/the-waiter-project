@@ -3,7 +3,7 @@ import {ListItem, Thumbnail, Text, Body } from 'native-base';
 import {formatPrice} from '../../../utils/formatPrice'
 
 export default class ListThumb extends Component {
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
   }
   render() {
     return (

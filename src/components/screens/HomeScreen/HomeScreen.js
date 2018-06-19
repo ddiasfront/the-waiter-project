@@ -7,11 +7,13 @@ import {
   Content
 } from "native-base"; 
 
-import * as textColors from '../../../constants/styles.js'
+import {getMenuOnLazyLoading} from '../../../api'
 
 class HomeScreen extends Component {
+  componentDidMount() {
+    
+  }
   render() {
-    console.log(textColors)
     return (
       <Container>
         <MenuHeader navigation={this.props.navigation} />
