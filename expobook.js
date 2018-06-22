@@ -1,9 +1,10 @@
 import React from 'react';
 import createExpobook from 'expobook';
-import FormExample from './src/components/atoms/input.js';
+import QuantityTracker from './src/components/Molecules/QuantityTracker'
+import { textColors } from './src/constants/styles'
 
 const expobook = createExpobook();
 
-expobook.add('My Button', () => <FormExample/>);
+expobook.add('Quantity Tracker', () => <QuantityTracker tintcolor={textColors.red}/>);
 
 export default expobook.build();
