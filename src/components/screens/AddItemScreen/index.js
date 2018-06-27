@@ -7,6 +7,8 @@ import {AddItem} from '../../Molecules/AddItem'
 import HeaderSimple from '../../Molecules/HeaderSimple'
 import ButtonFooter from '../../Molecules/ButtonFooter'
 import {insertOrder} from '../../../api'
+import {connect} from 'react-redux'
+import {addNewOrder} from '../../../../actions/order'
 
 class AddItemScreen extends Component {
     constructor(props) {
@@ -35,7 +37,9 @@ class AddItemScreen extends Component {
             Quantity: this.state.OrderQuantity
         }
     }, () => {
-      insertOrder(this.state.OrderItem.Table, this.state.OrderItem)
+      console.log(this.props)
+      this.props.addNewOrder(this.state.OrderItem)
+      // insertOrder(this.state.OrderItem.Table, this.state.OrderItem)
     }) : false
   }
   
@@ -62,4 +66,18 @@ class AddItemScreen extends Component {
   }
 }
 
-export default AddItemScreen;
+const mapStateToProps = state => {
+  return {
+    order: state.orderReducer
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addNewOrder: (order) => {
+      dispatch(addNewOrder(order))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AddItemScreen);
