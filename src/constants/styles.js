@@ -1,4 +1,5 @@
 export const textColors = {
     red: "#c64545",
-    grey: "#dedede"
+    grey: "#dedede",
+    white: "#fefefe"
 }

@@ -95,7 +95,7 @@ class MenuScreen extends Component {
           data={this.state.Menu}
           onEndReached={this._handleMenuQuery}
           onEndReachedThreshold={0.1}
-          renderItem={item => <ListThumb data={item}/>}
+          renderItem={item => <ListThumb table={this.state.QrData} data={item}/>}
           keyExtractor={(item, index) => index.toString()}
         />
       </View>

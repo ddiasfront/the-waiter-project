@@ -33,11 +33,18 @@
     "expobook": "0.0.4",
     "firebase": "^5.0.4",
     "install": "^0.11.0",
+    "moment": "^2.22.2",
     "native-base": "^2.4.5",
     "npm": "^6.1.0",
     "react": "^16.3.1",
     "react-native": "^0.55.4",
+    "react-native-router-flux": "^4.0.0-beta.31",
     "react-navigation-drawer": "^0.3.0",
-    "react-navigation-material-bottom-tabs": "^0.3.0"
+    "react-navigation-material-bottom-tabs": "^0.3.0",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "redux-logger": "^3.0.6",
+    "redux-promise": "^0.6.0",
+    "redux-thunk": "^2.3.0"
   }
 }

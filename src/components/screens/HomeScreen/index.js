@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import HomeScreen from './HomeScreen'
 import CodeScanner from '../CodeScanner'
 import MenuScreen from '../MenuScreen'
-import { createStackNavigator, SafeAreaView } from 'react-navigation';
+import AddItemScreen from '../AddItemScreen'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Icon } from 'native-base';
 
@@ -32,11 +32,21 @@ MenuScreen.navigationOptions = {
   ),
 }
 
+
+AddItemScreen.navigationOptions = {
+  header: null,
+  drawerLabel: 'AddItemScreen',
+  drawerIcon: ({ tintColor }) => (
+    <Icon style={{color: tintColor}} name='list' />
+  ),
+}
+
 const HomeScreenRouter = createDrawerNavigator(
   {
     HomeScreen: { screen: HomeScreen },
     CodeScanner: { screen: CodeScanner },
-    MenuScreen: { screen: MenuScreen }
+    MenuScreen: { screen: MenuScreen },
+    AddItemScreen: { screen: AddItemScreen }
   },
   {
     contentOptions: {

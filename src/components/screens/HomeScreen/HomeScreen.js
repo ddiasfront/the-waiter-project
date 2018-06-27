@@ -7,12 +7,8 @@ import {
   Content
 } from "native-base"; 
 
-import {getMenuOnLazyLoading} from '../../../api'
-
 class HomeScreen extends Component {
-  componentDidMount() {
-    
-  }
+
   render() {
     return (
       <Container>
@@ -29,8 +25,20 @@ class HomeScreen extends Component {
             style={{ marginTop: 10 }}
             onPress={() => this.props.navigation.navigate("CodeScanner")}
           >
-            Scan QR Code
+            Scan QR Code {(this.props.navigation.state.params && this.props.navigation.state.params.HasMenu == true) && 
+            'Again?'}
           </TextButton>
+          {  (this.props.navigation.state.params && this.props.navigation.state.params.HasMenu == true) &&
+
+          <TextButton
+            full
+            rounded
+            style={{ marginTop: 10 }}
+            onPress={() => this.props.navigation.navigate("MenuScreen")}
+          >
+            You got a code, go to Menu.
+          </TextButton>
+          }
         </Content>
       </Container>
     );

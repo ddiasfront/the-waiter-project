@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
 import {ListItem, Thumbnail, Text, Body, View } from 'native-base';
 import {formatPrice} from '../../../utils/formatPrice'
-import TextButton from '../../Atoms/Button'
-import QuantityTracker from '../../Molecules/QuantityTracker'
-import {textColors} from '../../../constants/styles'
+import { withNavigation } from 'react-navigation';
 
-export default class ListThumb extends Component {
+class ListThumb extends Component {
   
   componentDidMount() {
     this.setState({
-      QuantityTracker: 0
+      AddingItem: 0
     })
   }
 
@@ -18,7 +16,19 @@ export default class ListThumb extends Component {
   render() {
     return (
     <View style={{flex:0}}>
-      <ListItem style={{'flexDirection':'column', alignItems: 'flex-start'}}>
+      <ListItem onPress={() => 
+        this.setState({
+          AddingItem: {
+            Table: this.props.table,
+            Name:this.props.data.item.Name,
+            Price: this.props.data.item.Price,
+            Description: this.props.data.item.Description,
+            Photo: this.props.data.item.Photo
+          }} ,() => {
+            this.props.navigation.navigate('AddItemScreen', {AddingItem: this.state.AddingItem})
+          })
+      } 
+      style={{'flexDirection':'column', alignItems: 'flex-start'}}>
         <View style={{flexDirection: 'row'}}>
           <Body style={{alignItems: 'flex-start', flexDirection: 'column', flex:2} }>
           <Text style={{paddingBottom: 3}}>{this.props.data.item.Name}</Text>
@@ -27,12 +37,10 @@ export default class ListThumb extends Component {
           </Body>
           <Thumbnail square size={80} source={{ uri: `${this.props.data.item.Photo}` }} />
         </View>
-        <View style={{alignItems: 'flex-start', 'paddingTop': 12, flexDirection: 'row'}}>
-          <QuantityTracker _handleQuantity={this._handleQuantity} tintcolor={textColors.red}/>
-          <TextButton onPress={() => console.log('this button', this.props, this.state)}>Tell you what</TextButton>
-        </View>
       </ListItem>
     </View>
     );
   }
 }
+
+export default withNavigation(ListThumb)
