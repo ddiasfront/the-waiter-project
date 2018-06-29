@@ -8,7 +8,7 @@ import HeaderSimple from '../../Molecules/HeaderSimple'
 import ButtonFooter from '../../Molecules/ButtonFooter'
 import {insertOrder} from '../../../api'
 import {connect} from 'react-redux'
-import {addNewOrder} from '../../../../actions/order'
+import {addNewOrder, addNewItemToOrder} from '../../../../actions/order'
 
 class AddItemScreen extends Component {
     constructor(props) {
@@ -16,7 +16,7 @@ class AddItemScreen extends Component {
         this.state = {
             OrderQuantity: undefined,
             OrderItem: undefined,
-            AddingItem: this.props.navigation.state.params.AddingItem
+            AddingItem: this.props.order.newItem
         };
         this._handleQuantity = this._handleQuantity.bind(this)
         this._handleItem = this._handleItem.bind(this)
@@ -27,20 +27,12 @@ class AddItemScreen extends Component {
   }
 
   _handleItem() {
-    this.state.OrderQuantity > 0 ?
-    this.setState({
-        OrderItem: {
-            Table: this.state.AddingItem.Table.table,
-            Name: this.state.AddingItem.Name,
-            Description: this.state.AddingItem.Description,
-            Price: this.state.AddingItem.Price,
-            Quantity: this.state.OrderQuantity
-        }
-    }, () => {
-      console.log(this.props)
-      this.props.addNewOrder(this.state.OrderItem)
-      // insertOrder(this.state.OrderItem.Table, this.state.OrderItem)
-    }) : false
+    this.state.OrderQuantity > 0 ? console.log(this.props.order.newItem, 'NEWITEM') : false
+    this.props.addNewOrder(this.state.AddingItem)
+  }
+
+  componentDidUpdate() {
+    console.log(this.props.order)
   }
   
   render() {
@@ -76,6 +68,9 @@ const mapDispatchToProps = dispatch => {
   return {
     addNewOrder: (order) => {
       dispatch(addNewOrder(order))
+    },
+    addNewItemToOrder: () => {
+      dispatch(addNewItemToOrder())
     }
   }
 }

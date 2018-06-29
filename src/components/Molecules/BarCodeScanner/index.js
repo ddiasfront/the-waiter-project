@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, Dimensions, LayoutAnimation } from 'react-native'
 import { BarCodeScanner, Permissions } from 'expo';
+import { connect } from 'react-redux'
+import {recordCode} from '../../../../actions/code'
 
 class BarCodeScannerHandler extends Component {
   state = {
@@ -23,6 +25,17 @@ class BarCodeScannerHandler extends Component {
     if (result.data !== this.state.lastScannedUrl) {
       LayoutAnimation.spring();
       this.setState({ lastScannedUrl: result.data }, () => {
+
+        const _handleQrCode = QrCode => {
+          try {
+            let ParsedQRCode = JSON.parse(QrCode);
+            return ParsedQRCode
+          } catch (err) {
+            return err
+          }
+        };
+        let QrCode = _handleQrCode(this.state.lastScannedUrl)
+        this.props.recordCode(QrCode)
         this.props.navigation.navigate('MenuScreen', {QrData: `${this.state.lastScannedUrl}`})
       });
     }
@@ -49,5 +62,21 @@ class BarCodeScannerHandler extends Component {
   }
 }
 
-export default BarCodeScannerHandler
+const mapStateToProps = state => {
+  return {
+    code: state.codeReducer
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return {
+    recordCode: (code) => {
+      dispatch(recordCode(code))
+    }
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(BarCodeScannerHandler)
+
 

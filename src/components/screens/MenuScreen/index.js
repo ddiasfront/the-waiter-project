@@ -4,6 +4,7 @@ import SingleCard from "../../Atoms/Card";
 import Loading from "../../Molecules/Loading";
 import MenuHeader from "../../Molecules/MenuHeader";
 import { getMenuOnLazyLoading ,getMenuOnEnter, getMenuFirst, getRange } from "../../../api";
+import { connect } from 'react-redux'
 
 import { FlatList, ListView, View } from "react-native";
 
@@ -61,19 +62,6 @@ class MenuScreen extends Component {
   };
 
   componentDidMount() {
-    const _handleQrCode = QrCode => {
-      try {
-        let ParsedQRCode = JSON.parse(QrCode);
-        this.setState({ QrData: ParsedQRCode });
-      } catch (err) {
-        this.setState({ QrData: null });
-      }
-    };
-
-    this.props.navigation.state.params
-      ? _handleQrCode(this.props.navigation.state.params.QrData)
-      : this.props.navigation.navigate("HomeScreen");
-
     getMenuOnEnter()
       .then(result => {
         this.setState({ LastQueriedItemKey: result[0] });
@@ -86,21 +74,30 @@ class MenuScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
         <MenuHeader navigation={this.props.navigation} />
-        { this.state.QrData ?
-        <SingleCard>
-          {"Your table number: " + this.state.QrData.table}
-        </SingleCard> : false
+        { (this.props.code && this.props.code.table) && 
+        <View style={{ flex: 1 }}>
+          <SingleCard>
+            {"Your table number: " + this.props.code.table}
+          </SingleCard>
+          
+          <FlatList
+            data={this.state.Menu}
+            onEndReached={this._handleMenuQuery}
+            onEndReachedThreshold={0.1}
+            renderItem={item => <ListThumb table={this.props.code.table} data={item}/>}
+            keyExtractor={(item, index) => index.toString()}
+          />
+        </View>
         }
-        <FlatList
-          data={this.state.Menu}
-          onEndReached={this._handleMenuQuery}
-          onEndReachedThreshold={0.1}
-          renderItem={item => <ListThumb table={this.state.QrData} data={item}/>}
-          keyExtractor={(item, index) => index.toString()}
-        />
       </View>
     );
   }
 }
 
-export default MenuScreen;
+const mapStateToProps = state => {
+  return {
+    code: state.codeReducer
+  }
+}
+
+export default connect(mapStateToProps)(MenuScreen);

@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {ListItem, Thumbnail, Text, Body, View } from 'native-base';
 import {formatPrice} from '../../../utils/formatPrice'
 import { withNavigation } from 'react-navigation';
+import {addNewItem, addNewItemToOrder } from '../../../../actions/order'
+import {connect} from 'react-redux'
 
 class ListThumb extends Component {
   
@@ -25,7 +27,8 @@ class ListThumb extends Component {
             Description: this.props.data.item.Description,
             Photo: this.props.data.item.Photo
           }} ,() => {
-            this.props.navigation.navigate('AddItemScreen', {AddingItem: this.state.AddingItem})
+            this.props.addNewItem(this.state.AddingItem)
+            this.props.navigation.navigate('AddItemScreen')
           })
       } 
       style={{'flexDirection':'column', alignItems: 'flex-start'}}>
@@ -35,7 +38,9 @@ class ListThumb extends Component {
           <Text style={{paddingBottom: 3}}>{this.props.data.item.Price ? formatPrice(this.props.data.item.Price, 'R$') : 'Please verify if theres a price with the vendor'}</Text>
           <Text note>{this.props.data.item.Description}</Text>
           </Body>
-          <Thumbnail square size={80} source={{ uri: `${this.props.data.item.Photo}` }} />
+          {this.props.data.item.Photo &&
+            <Thumbnail square size={80} source={{ uri: `${this.props.data.item.Photo}` }} />
+          }
         </View>
       </ListItem>
     </View>
@@ -43,4 +48,19 @@ class ListThumb extends Component {
   }
 }
 
-export default withNavigation(ListThumb)
+const mapStateToProps = state => {
+  return {
+    order: state.orderReducer
+  }
+}
+
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addNewItem: (code) => {
+      dispatch(addNewItem(code))
+    }
+  }
+}
+
+export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(ListThumb))

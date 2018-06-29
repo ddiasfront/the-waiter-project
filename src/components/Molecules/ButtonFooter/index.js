@@ -4,9 +4,6 @@ import { Container, Header, Content, Footer, FooterTab, Button, Text } from 'nat
 
 
 class ButtonFooter extends Component {
-  componentDidMount() {
-    console.log(this.props)
-  }
   render() {
     return (
       <Footer>

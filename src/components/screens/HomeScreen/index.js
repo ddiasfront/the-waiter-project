@@ -3,6 +3,7 @@ import HomeScreen from './HomeScreen'
 import CodeScanner from '../CodeScanner'
 import MenuScreen from '../MenuScreen'
 import AddItemScreen from '../AddItemScreen'
+import OrderScreen from '../OrderScreen'
 import { createDrawerNavigator } from 'react-navigation-drawer';
 import { Icon } from 'native-base';
 
@@ -41,12 +42,21 @@ AddItemScreen.navigationOptions = {
   ),
 }
 
+OrderScreen.navigationOptions = {
+  header: null,
+  drawerLabel: 'OrderScreen',
+  drawerIcon: ({ tintColor }) => (
+    <Icon style={{color: tintColor}} name='list' />
+  ),
+}
+
 const HomeScreenRouter = createDrawerNavigator(
   {
     HomeScreen: { screen: HomeScreen },
     CodeScanner: { screen: CodeScanner },
     MenuScreen: { screen: MenuScreen },
-    AddItemScreen: { screen: AddItemScreen }
+    AddItemScreen: { screen: AddItemScreen },
+    OrderScreen: { screen: OrderScreen }
   },
   {
     contentOptions: {

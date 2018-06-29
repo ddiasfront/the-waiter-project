@@ -1,0 +1,1 @@
+export const RECORD_CODE = 'RECORD_CODE'
