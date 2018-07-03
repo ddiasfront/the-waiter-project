@@ -14,39 +14,44 @@ class AddItemScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            OrderQuantity: undefined,
+            OrderQuantity: 0,
             OrderItem: undefined,
-            AddingItem: this.props.order.newItem
+            AddingItem: {
+              ...this.props.order.newItem,
+              Quantity: 0
+            }
         };
         this._handleQuantity = this._handleQuantity.bind(this)
         this._handleItem = this._handleItem.bind(this)
     }
 
   _handleQuantity(quantity) {
-    this.setState({OrderQuantity: quantity})
+    this.setState({OrderQuantity: quantity}, () => {
+      this.setState({
+        AddingItem: {
+          ...this.state.AddingItem,
+          Quantity: this.state.OrderQuantity
+        }
+      }, () => {
+        console.log(this.state.AddingItem, 'quantidade atualizada')
+      })
+    }) 
   }
 
   _handleItem() {
-    this.state.OrderQuantity > 0 ? 
-    this.setState({
-      AddingItem: {
-        ...this.state.AddingItem,
-        Quantity: this.state.OrderQuantity
-      }
-    }, () => {
-      (this.props.order && this.props.order.orders && this.props.order.orders.length > 0) ? this.props.order.orders.map((item) => {
-        if ( item.Name == this.state.AddingItem ) {
-          this.props.updateOrderItem(this.state.AddingItem)
-        }
-      }) : this.props.addNewOrder(this.state.AddingItem)
-    }) : this.props.addNewOrder(this.state.AddingItem)
+    console.log(this.props.order.orders.length === 0)
+    this.props.order.orders.length === 0 ? this.props.addNewOrder(this.state.AddingItem) :
+    this.props.order.orders.every(order => order.Name !== this.state.AddingItem.Name) ? 
+    this.props.addNewOrder(this.state.AddingItem) :
+    this.props.updateOrderItem(this.state.AddingItem)
   } 
 
   componentDidUpdate() {
-    console.log(this.props.order)
+    console.log(this.props.order.orders)
   }
   
   componentDidMount() {
+    console.log(this.props.order.orders.length)
     console.log(this.props.order.newItem, 'NEW ITEM SELECTED FOR ADD ------------------------')
   }
   
