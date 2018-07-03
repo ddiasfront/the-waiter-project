@@ -1,4 +1,4 @@
-import {ADD_NEW_ORDER, ADD_NEW_ITEM, ADD_NEW_ITEM_TO_ORDER} from '../actions/order/actionTypes'
+import {ADD_NEW_ORDER, ADD_NEW_ITEM, ADD_NEW_ITEM_TO_ORDER, UPDATE_ITEM} from '../actions/order/actionTypes'
 
 const initialState = {
     orders: [],
@@ -18,12 +18,29 @@ const orderReducer = (state = initialState,  action) => {
         case ADD_NEW_ORDER: 
         return {
             ...state, 
-            orders: [...state.orders, action.order]
+            orders: [
+                ...state.orders.slice(0, state.orders.length),
+                action.order,
+                ...state.orders.slice(state.orders.length)
+            ]
+            
         }
         case ADD_NEW_ITEM:
             return {
                 ...state,
                 newItem: action.newItem
+            }
+        case UPDATE_ITEM:
+            return {
+                orders:  state.orders.map((item) => {
+                    if (item.Name !== action.itemUpdate.Name) {
+                        return item
+                    }
+                    return {
+                        ...item,
+                        ...action.itemUpdate
+                    }
+                })
             }
         default:
         return state
