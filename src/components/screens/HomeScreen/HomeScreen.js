@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import MenuHeader from "../../Molecules/MenuHeader";
 import SingleCard from "../../Atoms/Card";
 import TextButton from "../../Atoms/Button";
+import * as colors from '../../../constants/styles.js'
 import {
   Container,
   Content
@@ -18,6 +19,11 @@ class HomeScreen extends Component {
             {this.props.tables}
             Easy make your orders, start by scanning the QR code on your table
           </SingleCard>
+          {this.props.navigation.state.params && this.props.navigation.state.params.MenuItemsRequired == true && 
+          <SingleCard color={`${colors.textColors.red}`}>
+           To see the Menu you need to Scan the QR Code, please, touch the button below.
+          </SingleCard>
+          }
           <TextButton
             full
             rounded

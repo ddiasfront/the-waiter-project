@@ -39,11 +39,24 @@ class AddItemScreen extends Component {
   }
 
   _handleItem() {
-    console.log(this.props.order.orders.length === 0)
-    this.props.order.orders.length === 0 ? this.props.addNewOrder(this.state.AddingItem) :
+
+    const _onAddOrder = () => new Promise((resolve) => {
+      resolve(this.props.addNewOrder(this.state.AddingItem))
+    })
+
+    const _onUpdateOrder = () => new Promise((resolve) => {
+      resolve(this.props.updateOrderItem(this.state.AddingItem))
+    })
+
+    this.state.OrderQuantity > 0 ?
+    this.props.order.orders.length === 0 ? _onAddOrder().then(this.props.navigation.navigate('OrderScreen')) :
     this.props.order.orders.every(order => order.Name !== this.state.AddingItem.Name) ? 
-    this.props.addNewOrder(this.state.AddingItem) :
-    this.props.updateOrderItem(this.state.AddingItem)
+    _onAddOrder().then(
+     this.props.navigation.navigate('OrderScreen')
+    ) :
+    _onUpdateOrder().then(
+      this.props.navigation.navigate('OrderScreen')
+    ) : false
   } 
 
   componentDidUpdate() {

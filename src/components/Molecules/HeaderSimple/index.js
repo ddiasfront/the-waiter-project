@@ -14,7 +14,7 @@ export default class HeaderSimple extends Component {
           </Left>
          : false}
           <Body>
-            <Title>{this.props.chilren}</Title>
+            <Title>{this.props.children}</Title>
           </Body>
         {this.props._handleCancelButton ?
           <Right>

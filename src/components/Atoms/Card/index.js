@@ -9,9 +9,9 @@ import {
 export default class SingleCard extends React.Component {
   render() {
     return (
-      <Card style={{flex: 0  }}>
+      <Card style={{flex: 0}}>
         <CardItem>
-            <Text>
+            <Text style={{color: this.props.color}}>
               {this.props.children}
             </Text>
         </CardItem>

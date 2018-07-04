@@ -62,12 +62,18 @@ class MenuScreen extends Component {
   };
 
   componentDidMount() {
+    if (this.props.code && this.props.code.table) {
     getMenuOnEnter()
       .then(result => {
         this.setState({ LastQueriedItemKey: result[0] });
         this.setState({ Menu: result[1] });
       })
       .then(this.setState({ Loading: false }));
+    }
+    else {
+      this.props.navigation.navigate('HomeScreen', {MenuItemsRequired: true})
+    }
+    
   }
 
   render() {
