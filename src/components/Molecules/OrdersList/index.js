@@ -1,47 +1,21 @@
 import React, { Component } from 'react';
-import { Content, SwipeRow, View, Text, Icon, Button } from 'native-base'
-import {connect} from 'react-redux'
+import { FlatList } from "react-native"
+import { connect } from 'react-redux'
 import { withNavigation } from 'react-navigation'
+import {textColors} from '../../../constants/styles'
+import {formatPrice} from '../../../utils/formatPrice'
+import OrdersListItem from '../OrdersListItem'
 
-class OrdersList extends Component {
+export default class OrdersList extends Component {
   render() {
     return (
-      <View>
-        <SwipeRow
-          rightOpenValue={-75}
-          body={
-            <View style={{flex: 1}}>
-              <Button transparent style={{flex:1, flexDirection: 'row'}} onPress={() => console.log('love this item, but edit')}>
-                <Text>{this.props.data.item.Quantity}</Text>
-                <Text>{this.props.data.item.Name}</Text>
-                <Text>{this.props.data.item.Price * this.props.data.item.Quantity}</Text>
-              </Button>
-            </View>
-          }
-          right={
-            <Button danger onPress={() => alert('Trash')}>
-              <Icon active name="trash" />
-            </Button>
-          }
-        />
-    </View>
+      <FlatList
+      data={this.props.orders}
+      // onEndReached={this._handleMenuQuery}
+      // onEndReachedThreshold={0.1}
+      renderItem={item => <OrdersListItem table={this.props.table} data={item}/>}
+      keyExtractor={(item, index) => index.toString()}
+    />
     );
   }
 }
-
-const mapStateToProps = state => {
-  return {
-    order: state.orderReducer
-  }
-}
-
-
-const mapDispatchToProps = dispatch => {
-  return {
-    addNewItem: (code) => {
-      dispatch(addNewItem(code))
-    }
-  }
-}
-
-export default withNavigation(connect(mapStateToProps, mapDispatchToProps)(OrdersList))

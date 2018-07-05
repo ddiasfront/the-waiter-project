@@ -23,17 +23,9 @@ class OrderScreen extends Component {
         >
         Orders
         </HeaderSimple>
-        {/* { this.state.QrData ?
-        <SingleCard>
-          {"Your table number: " + this.state.QrData.table}
-        </SingleCard> : false
-        } */}
-        <FlatList
-          data={this.props.order.orders}
-          // onEndReached={this._handleMenuQuery}
-          // onEndReachedThreshold={0.1}
-          renderItem={item => <OrdersList table={this.state.QrData} data={item}/>}
-          keyExtractor={(item, index) => index.toString()}
+        <OrdersList
+          orders={this.props.order.orders}
+          table={this.state.QrData}
         />
         <OrderFinal/>
       </View>
