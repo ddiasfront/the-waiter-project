@@ -18,8 +18,8 @@ class OrderScreen extends Component {
     return (
       <View style={{ flex: 1 }}>
         <HeaderSimple 
-        _handleBackButton={() => this.props.navigation.navigate('MenuScreen')} 
-        _handleCancelButton={() => this.props.navigation.navigate('HomeScreen', {HasMenu: true})}
+        _handleBackButton={() => this.props._handleBackButton} 
+        _handleCancelButton={() => this.props._handleCancelButton}
         >
         Orders
         </HeaderSimple>

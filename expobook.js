@@ -7,8 +7,15 @@ import {AddItem} from './src/components/Molecules/AddItem'
 import QuantityTracker from './src/components/Molecules/QuantityTracker'
 import OrdersList from './src/components/Molecules/OrdersList'
 import OrdersListItem from './src/components/Molecules/OrdersListItem'
+
 import AddingItemQuantity from './src/components/Organisms/AddingItemQuantity'
 import BarCodeScannerHandler from './src/components/Molecules/BarCodeScanner'
+import HeaderSimple from './src/components/Molecules/HeaderSimple'
+import ButtonFooter from './src/components/Molecules/ButtonFooter'
+import ListThumb from './src/components/Molecules/ListThumb'
+import Loading from './src/components/Molecules/Loading'
+import MenuHeader from './src/components/Molecules/MenuHeader'
+import OrderFinal from './src/components/Molecules/OrderFinal'
 
 
 import TextButton from './src/components/Atoms/Button'
@@ -56,25 +63,7 @@ const ordersArray = [
   }
 ]
 
-
-
-expobook.add('BarCodeScanner Handler', () => <Provider>
-<BarCodeScannerHandler store={store}/>
-</Provider>);
-
-expobook.add('Add Item', () =>
-<Container>
-  <Content>
-    <AddItem AddingItem={ordersArray[0]} />
-  </Content>
-</Container>
-);
-
-
-expobook.add('Add Item with quantity', () =>
-  <AddingItemQuantity tintcolor={textColors.red} AddingItem={ordersArray[0]}/>
-);
-
+//ATOMS
 expobook.add('SingleCard', () =>
 <SingleCard>
 Card Content
@@ -93,6 +82,74 @@ expobook.add('Text Button', () =>
 Button Text
 </TextButton>
 );
+
+
+//MOLECULES
+
+
+expobook.add('Add Item', () =>
+<Container>
+  <Content>
+    <AddItem AddingItem={ordersArray[0]} />
+  </Content>
+</Container>
+);
+
+expobook.add('BarCodeScanner Handler', () => <Provider>
+<BarCodeScannerHandler store={store}/>
+</Provider>);
+
+
+expobook.add('Button Footer', () =>
+<ButtonFooter _handleFooterButton={console.log(`HANDLER BUTTON`)} bgColor={`#000`} textColor={`#fff`}>
+ Children here
+</ButtonFooter>
+);
+
+expobook.add('Header Simple', () =>
+<HeaderSimple _handleBackButton={true} _handleCancelButton={true}>
+  The Header Title
+</HeaderSimple>
+);
+
+expobook.add('ListThumb', () =>
+<Provider>
+<ListThumb store={store} data={{ item: ordersArray[0] }}/>
+</Provider>
+);
+
+expobook.add('Loading', () =>
+<Loading element={`The loading component`}/>
+);
+
+expobook.add('Menu Header', () =>
+<MenuHeader/>
+);
+
+
+expobook.add('OrderFinal', () =>
+<Provider>
+<OrderFinal store={store} order={{orders: [
+  ordersArray[0]
+]}}/>
+</Provider>
+);
+
+
+expobook.add('Add Item', () =>
+<Container>
+  <Content>
+    <AddItem AddingItem={ordersArray[0]} />
+  </Content>
+</Container>
+);
+
+
+expobook.add('Add Item with quantity', () =>
+  <AddingItemQuantity tintcolor={textColors.red} AddingItem={ordersArray[0]}/>
+);
+
+
 
 expobook.add('Quantity Tracker', () => <QuantityTracker tintcolor={textColors.red}/>);
 

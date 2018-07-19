@@ -8,8 +8,8 @@ class ButtonFooter extends Component {
     return (
       <Footer>
           <FooterTab>
-            <Button onPress={() => this.props._handleFooterButton()} style={{zIndex: 99999, backgroundColor: this.props.textColors.red}} full>
-              <Text style={{color: this.props.textColors.white}}>{this.props.children}</Text>
+            <Button onPress={() => this.props._handleFooterButton()} style={{zIndex: 99999, backgroundColor: this.props.bgColor}} full>
+              <Text style={{color: this.props.textColor}}>{this.props.children}</Text>
             </Button>
           </FooterTab>
         </Footer>

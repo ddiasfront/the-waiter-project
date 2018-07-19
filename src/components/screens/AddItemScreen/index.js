@@ -84,7 +84,8 @@ class AddItemScreen extends Component {
           />
         </Content>
         <ButtonFooter
-          textColors={textColors}
+          bgColor={textColors.red}
+          textColor={textColors.white}
           _handleFooterButton={this._handleItem}
         >
           Adicionar ao pedido
